@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class CrimeLab {
       Crime crime = new Crime();
       crime.setTitle("Crime #" + i);
       crime.setSolved(i % 2 == 0);
+      crime.setRequiresPolice(i % 3 == 0);
       mCrimes.add(crime);
     }
   }
