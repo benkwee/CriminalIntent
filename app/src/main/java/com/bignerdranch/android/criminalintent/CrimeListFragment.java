@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -50,6 +53,7 @@ public class CrimeListFragment extends Fragment {
     private TextView mTitleTextView;
     private TextView mDateTextView;
     private Button mPoliceButton;
+    private ImageView mSolvedImageView;
 
     public CrimeHolder(LayoutInflater inflator, ViewGroup parent, int viewType) {
       super(inflator.inflate(viewType, parent, false));
@@ -57,16 +61,21 @@ public class CrimeListFragment extends Fragment {
 
       mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
       mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
-
+      mSolvedImageView = (ImageView) itemView.findViewById(R.id.crime_solved);
       mPoliceButton = (Button) itemView.findViewById(R.id.crime_contact_police);
     }
 
     public void bind(Crime crime) {
       mCrime = crime;
       mTitleTextView.setText(crime.getTitle());
-      mDateTextView.setText(crime.getDate().toString());
 
-      if (crime.getRequiresPolice()) {
+      DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM d, yyyy");
+      mDateTextView.setText(dateFormat.format(crime.getDate()));
+
+      if (mSolvedImageView != null) {
+        mSolvedImageView.setVisibility(crime.getSolved() ? View.VISIBLE : View.GONE);
+      }
+      if (mPoliceButton != null && crime.getRequiresPolice() && !crime.getSolved()) {
         mPoliceButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -96,7 +105,7 @@ public class CrimeListFragment extends Fragment {
 
     @Override
     public int getItemViewType(int position) {
-      if (mCrimes.get(position).getRequiresPolice()) {
+      if (mCrimes.get(position).getRequiresPolice() && !mCrimes.get(position).getSolved()) {
         return mPoliceCrime;
       }
       return mNormalCrime;
