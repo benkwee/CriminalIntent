@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.view.ViewPager
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/crime_view_pager"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+android:layout_height="match_parent">
 
-</android.support.v4.view.ViewPager>
+  <android.support.v4.view.ViewPager
+    android:id="@+id/crime_view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+  </android.support.v4.view.ViewPager>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+      android:id="@+id/jump_first_button"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_margin="16dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginStart="16dp"
+      android:text="@string/first"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+      android:id="@+id/jump_last_button"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginEnd="16dp"
+      android:text="@string/last"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+
+</FrameLayout>
