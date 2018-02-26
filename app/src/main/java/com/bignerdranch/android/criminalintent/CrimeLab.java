@@ -27,13 +27,10 @@ public class CrimeLab {
 
   private CrimeLab(Context context) {
     mCrimes = new LinkedHashMap<>();
-    for (int i = 0; i < 100; i++) {
-      Crime crime = new Crime();
-      crime.setTitle("Crime #" + i);
-      crime.setSolved(i % 2 == 0);
-      crime.setRequiresPolice(i % 3 == 0);
-      mCrimes.put(crime.getID(), crime);
-    }
+  }
+
+  public void addCrime(Crime c) {
+    mCrimes.put(c.getID(), c);
   }
 
   public List<Crime> getCrimes() {
@@ -42,5 +39,9 @@ public class CrimeLab {
 
   public Crime getCrime(UUID id) {
     return mCrimes.get(id);
+  }
+
+  public void deleteCrime(UUID id) {
+    mCrimes.remove(id);
   }
 }
